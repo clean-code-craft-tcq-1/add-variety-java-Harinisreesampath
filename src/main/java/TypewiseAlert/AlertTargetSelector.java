@@ -14,4 +14,7 @@ public class AlertTargetSelector {
 		TypewiseAlert.sendToEmail(breachType);
 	}
 	
+	public void TO_CONSOLE(BreachType breachType){
+		TypewiseAlert.sentToConsole(breachType);
+	}
 }

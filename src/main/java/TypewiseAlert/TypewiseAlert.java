@@ -3,6 +3,8 @@ package TypewiseAlert;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import TypewiseAlert.TypewiseAlert.BreachType;
+
 public class TypewiseAlert 
 {
     public enum BreachType {
@@ -53,6 +55,11 @@ public class TypewiseAlert
           	 public String toString() {
  	            return "TO_EMAIL";
  	            }
+        },
+        TO_CONSOLE{
+        	 public String toString() {
+  	            return "TO_CONSOLE";
+  	            }
         }
       };
       
@@ -115,5 +122,9 @@ public class TypewiseAlert
 		e.printStackTrace();
 	}
 
+    }
+    
+    public static void sentToConsole(BreachType breachType) {
+    	System.out.println("The breach type for the given temperature is "+ breachType.name());
     }
 }
