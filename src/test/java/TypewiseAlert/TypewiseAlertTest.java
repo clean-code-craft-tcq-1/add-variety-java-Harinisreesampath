@@ -6,21 +6,15 @@ import alertSelector.*;
 import breachTypeSelector.*;
 import coolingSelector.*;
 
-import org.junit.Before;
+
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+
+
+
 
  
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+
 
 public class TypewiseAlertTest 
 {
@@ -76,16 +70,7 @@ public class TypewiseAlertTest
        TypewiseAlert.checkAndAlert(new Console(),batteryCharacter, 60);
     }
     
-    
-    @Test
-    public void checkingAndAlertingTheUser() {   	
-        BatteryCharacter batteryCharacter  = new BatteryCharacter(new HighActiveCooling(),"Brand");
-        //TypewiseAlert.checkAndAlert(new Mail(),batteryCharacter, 60);
-        TypewiseAlert typewiseAlert = spy(new TypewiseAlert());
-        typewiseAlert.checkAndAlert(new Console(), batteryCharacter, 60);
-        verify(typewiseAlert).checkAndAlert(new Console(), batteryCharacter, 60);
 
-    }
 
 
 }
