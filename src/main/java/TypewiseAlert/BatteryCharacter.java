@@ -1,11 +1,11 @@
 package TypewiseAlert;
 
-import coolingSelector.ICoolingType;
+import coolingSelector.IIdentifyCoolingType;
 
 public class BatteryCharacter {
-    public ICoolingType icoolingType;
+    public IIdentifyCoolingType icoolingType;
     public String brand;
-	public BatteryCharacter(ICoolingType coolingType, String brand) {
+	public BatteryCharacter(IIdentifyCoolingType coolingType, String brand) {
 		this.icoolingType = coolingType;
 		this.brand = brand;
 	}
