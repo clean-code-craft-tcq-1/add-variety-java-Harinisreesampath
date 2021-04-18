@@ -1,11 +1,11 @@
 package alertSelector;
 
-import breachTypeSelector.IBreachType;
+import breachTypeSelector.IIdentifyBreachType;
 
-public class Console implements IAlertType {
+public class Console implements INotifyObservers {
 
 	@Override
-	public void alert(IBreachType breachType) {
+	public void alert(IIdentifyBreachType breachType) {
     	System.out.println("The breach type for the given temperature is "+ breachType.getBreachType());
 		
 	}

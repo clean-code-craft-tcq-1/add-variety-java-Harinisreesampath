@@ -1,11 +1,11 @@
 package alertSelector;
 
-import breachTypeSelector.IBreachType;
+import breachTypeSelector.IIdentifyBreachType;
 
-public class Controller implements IAlertType {
+public class Controller implements INotifyObservers {
 
 	@Override
-	public void alert(IBreachType breachType) {
+	public void alert(IIdentifyBreachType breachType) {
 	      int header = 0xfeed;
 	      System.out.printf("%d : \n", header, breachType);
 	}

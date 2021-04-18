@@ -1,13 +1,16 @@
 package alertSelector;
 
-import breachTypeSelector.IBreachType;
+import TypewiseAlert.TypewiseAlert;
+import breachTypeSelector.IIdentifyBreachType;
 
-public class Mail implements IAlertType {
-
+public class Mail implements INotifyObservers {
 	@Override
-	public void alert(IBreachType breachType) {
-		 String recepient = "a.b@c.com";
-		 breachType.breachMessage(recepient);
+	public void alert(IIdentifyBreachType breachType) {
+		if(TypewiseAlert.breachMessage != null) {
+			String recepient = "a.b@c.com";		 
+			System.out.printf("To: %s\n", recepient);
+			System.out.println("Hi, the temperature is "+ TypewiseAlert.breachMessage);
+		 }
 	}
 
 }
