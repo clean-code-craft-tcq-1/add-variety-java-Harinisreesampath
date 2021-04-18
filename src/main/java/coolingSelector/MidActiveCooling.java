@@ -1,6 +1,6 @@
 package coolingSelector;
 
-public class MidActiveCooling implements ICoolingType{
+public class MidActiveCooling implements IIdentifyCoolingType{
 
 	@Override
 	public int fetchUpperLimit() {

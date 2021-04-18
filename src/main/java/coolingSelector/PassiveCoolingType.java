@@ -1,6 +1,6 @@
 package coolingSelector;
 
-public class PassiveCoolingType implements ICoolingType{
+public class PassiveCoolingType implements IIdentifyCoolingType{
 
 	@Override
 	public int fetchUpperLimit() {

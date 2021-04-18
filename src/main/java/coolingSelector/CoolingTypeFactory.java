@@ -1,8 +1,8 @@
 package coolingSelector;
 
 public class CoolingTypeFactory {
-	ICoolingType icooling;
-	public CoolingTypeFactory (ICoolingType icooling) {
+	IIdentifyCoolingType icooling;
+	public CoolingTypeFactory (IIdentifyCoolingType icooling) {
 		this.icooling = icooling;
 	}
 	
