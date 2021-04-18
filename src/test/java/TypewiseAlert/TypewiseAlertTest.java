@@ -1,76 +1,127 @@
 package TypewiseAlert;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+
 import TypewiseAlert.BatteryCharacter;
 import alertSelector.*;
-import breachTypeSelector.*;
 import coolingSelector.*;
-
-
 import org.junit.Test;
-
-
-
-
- 
-
-
 
 public class TypewiseAlertTest 
 {
+	private FakeMail fakeMail;
+	private FakeController fakeController;
+    private FakeConsole fakeConsole;
+    private HighActiveCooling highActiveCooling;
+    private PassiveCoolingType passiveCoolingType;
+    private MidActiveCooling midActiveCooling;
+    private BatteryCharacter batteryCharacter; 
+	List<INotifyObservers> iAlertTypes;
 	
-	
+	@Before
+	public void executedBeforeEach() {
+		fakeMail = new FakeMail();
+		fakeController = new FakeController();
+		fakeConsole = new FakeConsole();
+		highActiveCooling = new HighActiveCooling();
+		passiveCoolingType = new PassiveCoolingType(); 
+		midActiveCooling = new MidActiveCooling();
+		batteryCharacter = new BatteryCharacter(highActiveCooling,"Brand");
+		iAlertTypes = new ArrayList<INotifyObservers>();
+		iAlertTypes.add(fakeMail);
+		iAlertTypes.add(fakeController);
+		iAlertTypes.add(fakeConsole);
+    }	
+
     @Test
-    public void infersBreachAsPerLimits_TooLow()
+    public void infersBreachAsPerLimitsForTooLow()
     {
     	assertEquals(TypewiseAlert.inferBreach(12, 20, 30).getBreachType(),"TooLow");  
     }
     @Test
-    public void infersBreachAsPerLimits_TooHigh()
+    public void infersBreachAsPerLimitsForTooHigh()
     {
     	assertEquals(TypewiseAlert.inferBreach(80, 20, 30).getBreachType(),"TooHigh");  
     }
     
     @Test
-    public void infersBreachAsPerLimits_Normal()
+    public void infersBreachAsPerLimitsForNormal()
     {
     	assertEquals(TypewiseAlert.inferBreach(25, 20, 30).getBreachType(),"Normal");  
     }    
     
     @Test
-    public void classifiesTemperatureBreachType_HighActiveCooling() {
-       assertEquals(TypewiseAlert.classifyTemperatureBreach(new HighActiveCooling(), 50).getBreachType(), "TooHigh");
+    public void classifiesTemperatureBreachTypeForHighActiveCooling() {
+       assertEquals(TypewiseAlert.classifyTemperatureBreach(highActiveCooling, 50).getBreachType(), "TooHigh");
     }
     
     @Test
-    public void classifiesTemperatureBreachType_PassiveCoolingType() {
-       assertEquals(TypewiseAlert.classifyTemperatureBreach(new PassiveCoolingType(), 50).getBreachType(), "TooHigh");
+    public void classifiesTemperatureBreachTypeForPassiveCoolingType() {
+       assertEquals(TypewiseAlert.classifyTemperatureBreach(passiveCoolingType, 50).getBreachType(), "TooHigh");
     }
     
     @Test
-    public void classifiesTemperatureBreachType_MidActiveCooling() {
-       assertEquals(TypewiseAlert.classifyTemperatureBreach(new MidActiveCooling(), 50).getBreachType(), "TooHigh");
+    public void classifiesTemperatureBreachTypeForMidActiveCooling() {
+       assertEquals(TypewiseAlert.classifyTemperatureBreach(midActiveCooling, 50).getBreachType(), "TooHigh");
     }
     
     @Test
-    public void checkingAndAlertingTheUser_Mail() { 
-        BatteryCharacter batteryCharacter  = new BatteryCharacter(new HighActiveCooling(),"Brand");
-       TypewiseAlert.checkAndAlert(new Mail(),batteryCharacter, 60);
+    public void checkingAndAlertingHighBreachViaController() { 
+        TypewiseAlert.checkAndAlert(fakeController,batteryCharacter, 60);
+        assertEquals(fakeController.breachType, "TooHigh");
     }
     
     @Test
-    public void checkingAndAlertingTheUser_Controller() { 
-        BatteryCharacter batteryCharacter  = new BatteryCharacter(new HighActiveCooling(),"Brand");
-       TypewiseAlert.checkAndAlert(new Controller(),batteryCharacter, 60);
+    public void checkingAndAlertingLowBreachViaController() { 
+        TypewiseAlert.checkAndAlert(fakeController,batteryCharacter, -1);
+        assertEquals(fakeController.breachType, "TooLow");
     }
     
     @Test
-    public void checkingAndAlertingTheUser_Console() { 
-        BatteryCharacter batteryCharacter  = new BatteryCharacter(new HighActiveCooling(),"Brand");
-       TypewiseAlert.checkAndAlert(new Console(),batteryCharacter, 60);
+    public void checkingAndAlertingNormalValueViaController() { 
+        TypewiseAlert.checkAndAlert(fakeController,batteryCharacter, 10);
+        assertEquals(fakeController.breachType, "Normal");
     }
     
+    @Test
+     public void checkingAndAlertingHighBreachViaMail() { 
+        TypewiseAlert.checkAndAlert(fakeMail,batteryCharacter, 60);
+        assertEquals(fakeMail.breachType, "TooHigh");
+    }    
+    
+    @Test
+    public void checkingAndAlertingLowBreachViaMail() { 
+       TypewiseAlert.checkAndAlert(fakeMail,batteryCharacter, -1);
+       assertEquals(fakeMail.breachType, "TooLow");
+   }
+    
+    @Test
+    public void checkingAndAlertingHighBreachViaConsole() { 
+        TypewiseAlert.checkAndAlert(fakeConsole,batteryCharacter, 60);
+        assertEquals(fakeConsole.breachType, "TooHigh");
+    }
+    
+    @Test
+    public void checkingAndAlertingLowBreachViaConsole() { 
+        TypewiseAlert.checkAndAlert(fakeConsole,batteryCharacter, -1);
+        assertEquals(fakeConsole.breachType, "TooLow");
+    }
+    
+    @Test
+    public void checkingAndAlertingNormalValueViaConsole() { 
+        TypewiseAlert.checkAndAlert(fakeConsole,batteryCharacter, 10);
+        assertEquals(fakeConsole.breachType, "Normal");
+    }
+    
+    @Test
+    public void checkingAndAlertingAllSystems() {
+        TypewiseAlert.checkAndAlertAllSystems(iAlertTypes,batteryCharacter,60);
 
-
+    }
 
 }
