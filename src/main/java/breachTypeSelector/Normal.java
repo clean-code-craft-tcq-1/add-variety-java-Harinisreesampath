@@ -1,6 +1,6 @@
 package breachTypeSelector;
 
-public class Normal implements IBreachType {
+public class Normal implements IIdentifyBreachType {
 	String breachType;
 	public Normal() {		
 		this.breachType = "Normal";
@@ -9,10 +9,5 @@ public class Normal implements IBreachType {
 	public String getBreachType() {
 		return breachType;
 	}
-	@Override
-	public void breachMessage(String recepient) {
-        System.out.printf("To: %s\n", recepient);
-        System.out.println("Hi, the temperature is too normal\n");		
-	}
-	
+
 }
