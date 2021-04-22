@@ -2,7 +2,7 @@ package alertSelector;
 
 import breachTypeSelector.IIdentifyBreachType;
 
-public class Console implements INotifyObservers {
+public class Console implements IAlertTarget {
 
 	@Override
 	public void alert(IIdentifyBreachType breachType) {

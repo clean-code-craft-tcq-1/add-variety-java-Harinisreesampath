@@ -3,7 +3,7 @@ package alertSelector;
 import TypewiseAlert.TypewiseAlert;
 import breachTypeSelector.IIdentifyBreachType;
 
-public class Mail implements INotifyObservers {
+public class Mail implements IAlertTarget {
 	@Override
 	public void alert(IIdentifyBreachType breachType) {
 		if(TypewiseAlert.breachMessage != null) {

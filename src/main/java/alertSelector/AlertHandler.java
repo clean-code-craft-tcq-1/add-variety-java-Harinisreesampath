@@ -5,15 +5,15 @@ import breachTypeSelector.IIdentifyBreachType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlertHandler implements INotifyObservers {
-	List<INotifyObservers> alerters = new ArrayList<INotifyObservers> ();
+public class AlertHandler implements IAlertTarget {
+	List<IAlertTarget> alerters = new ArrayList<IAlertTarget> ();
 	
-	public void addAllAlerters(INotifyObservers iAlertType) {
+	public void addAllTargetSystems(IAlertTarget iAlertType) {
 		alerters.add(iAlertType);
 	}
 	
 	public void alertToAllSystems(IIdentifyBreachType breachType) {
-		for(INotifyObservers alertType: alerters) {
+		for(IAlertTarget alertType: alerters) {
 			alertType.alert(breachType);
 		}
 	}
