@@ -3,7 +3,7 @@ package TypewiseAlert;
 import java.util.List;
 
 import alertSelector.AlertHandler;
-import alertSelector.INotifyObservers;
+import alertSelector.IAlertTarget;
 import breachTypeSelector.IIdentifyBreachType;
 import breachTypeSelector.Normal;
 import breachTypeSelector.TooHigh;
@@ -35,17 +35,17 @@ public class TypewiseAlert
     }
     
     public static void checkAndAlert(
-      INotifyObservers ialertType, BatteryCharacter batteryChar, double temperatureInC){
+      IAlertTarget ialertType, BatteryCharacter batteryChar, double temperatureInC){
       IIdentifyBreachType breachType = classifyTemperatureBreach(batteryChar.icoolingType, temperatureInC);
       ialertType.alert(breachType);
     }
     
-    public static void checkAndAlertAllSystems(List<INotifyObservers> iAlertTypes,BatteryCharacter batteryChar, double temperatureInC) {
+    public static void checkAndAlertAllSystems(List<IAlertTarget> iAlertTypes,BatteryCharacter batteryChar, double temperatureInC) {
     	AlertHandler alertHandler = new AlertHandler();
-    	for(INotifyObservers alerters: iAlertTypes) {
-    		alertHandler.addAllAlerters(alerters);
+    	for(IAlertTarget alerters: iAlertTypes) {
+    		alertHandler.addAllTargetSystems(alerters);
     	}
-    	INotifyObservers ialertType = alertHandler;
+    	IAlertTarget ialertType = alertHandler;
     	checkAndAlert(ialertType,batteryChar,temperatureInC);
     }
 
