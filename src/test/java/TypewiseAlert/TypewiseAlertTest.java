@@ -21,7 +21,7 @@ public class TypewiseAlertTest
     private PassiveCoolingType passiveCoolingType;
     private MidActiveCooling midActiveCooling;
     private BatteryCharacter batteryCharacter; 
-	List<INotifyObservers> iAlertTypes;
+	List<IAlertTarget> iAlertTypes;
 	
 	@Before
 	public void executedBeforeEach() {
@@ -32,7 +32,7 @@ public class TypewiseAlertTest
 		passiveCoolingType = new PassiveCoolingType(); 
 		midActiveCooling = new MidActiveCooling();
 		batteryCharacter = new BatteryCharacter(highActiveCooling,"Brand");
-		iAlertTypes = new ArrayList<INotifyObservers>();
+		iAlertTypes = new ArrayList<IAlertTarget>();
 		iAlertTypes.add(fakeMail);
 		iAlertTypes.add(fakeController);
 		iAlertTypes.add(fakeConsole);
@@ -121,7 +121,9 @@ public class TypewiseAlertTest
     @Test
     public void checkingAndAlertingAllSystems() {
         TypewiseAlert.checkAndAlertAllSystems(iAlertTypes,batteryCharacter,60);
-
+        assertEquals(fakeMail.breachType, "TooHigh");
+        assertEquals(fakeController.breachType, "TooHigh");
+        assertEquals(fakeConsole.breachType, "TooHigh");
     }
 
 }

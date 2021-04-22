@@ -1,9 +1,9 @@
 package TypewiseAlert;
 
-import alertSelector.INotifyObservers;
+import alertSelector.IAlertTarget;
 import breachTypeSelector.IIdentifyBreachType;
 
-public class FakeMail implements INotifyObservers {
+public class FakeMail implements IAlertTarget {
 	public String breachType; 
 
 	@Override
